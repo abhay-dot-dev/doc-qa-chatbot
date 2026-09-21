@@ -22,3 +22,7 @@ uvicorn
 
 sqlalchemy
 psycopg2-binary
+
+pwdlib[argon2]
+python-jose[cryptography]
+email-validator
