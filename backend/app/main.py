@@ -7,6 +7,7 @@ from app.models.message import Message
 from app.models.document import Document
 from app.models.conversation import Conversation
 from app.api import auth
+from app.api import upload
 
 # tables are created
 Base.metadata.create_all(bind=engine)
@@ -14,3 +15,4 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 app.include_router(auth.router)
+app.include_router(upload.router)
