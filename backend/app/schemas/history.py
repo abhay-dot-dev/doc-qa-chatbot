@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from datetime import datetime
 
 class ConversationHistory(BaseModel):
-    conversation_id : int
+    id : int
     title : str
     created_at : datetime
 
