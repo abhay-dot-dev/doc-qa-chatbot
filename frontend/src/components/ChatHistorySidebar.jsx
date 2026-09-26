@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { apiRequest } from '../services/api';
 
-const ChatHistorySidebar = () => {
+const ChatHistorySidebar = ({ setSelectedConversationId }) => {
 
     const [chatHistory, setChatHistory] = useState([]);
 
@@ -22,7 +22,7 @@ const ChatHistorySidebar = () => {
         <div>
             {
                 chatHistory.map((h) => (
-                    <p key={h.id}>title: {h.title}</p>
+                    <p onClick={() => setSelectedConversationId(h.id)} key={h.id}>title: {h.title}</p>
                 ))
             }
         </div>
