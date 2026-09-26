@@ -13,3 +13,12 @@ export async function loginUser(email, password) {
 
     return data;
 }
+
+export async function signupUser(email, password) {
+    const data = await apiRequest("/signup", {
+        method: "POST",
+        body: JSON.stringify({email, password})
+    });
+
+    return data;
+}
