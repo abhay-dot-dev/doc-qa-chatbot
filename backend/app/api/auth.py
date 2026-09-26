@@ -1,19 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.db.database import SessionLocal
+from app.db.database import get_db
 from app.models.user import User
+from app.core.dependencies import get_current_user
 from app.schemas.auth import UserCreate, UserLogin
 from app.core.security import hash_password, verify_password, create_access_token
 
 router = APIRouter()
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield(db)
-    finally:
-        db.close()
 
 # SIGNUP
 @router.post("/signup", status_code=201)
@@ -61,3 +55,10 @@ def login(user: UserLogin, db : Session = Depends(get_db)):
             status_code=401,
             detail="Invalid credentials"
         )
+
+@router.get("/me")
+def get_me(current_user = Depends(get_current_user)):
+    return {
+        "id": current_user.id,
+        "email": current_user.email
+    }
