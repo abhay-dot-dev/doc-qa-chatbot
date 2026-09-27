@@ -30,18 +30,34 @@ const Home = () => {
   }
 
   return (
-    <div>
-      <Navbar/>
-      <ChatHistorySidebar
-        setSelectedConversationId={setSelectedConversationId}
-        refreshHistory={refreshHistory}
-      />
-      <PdfUpload />
-      <ChatBox
-        conversationMessage={conversationMessage}
-        selectedConversationId={selectedConversationId}
-        handleRefreshHistory={handleRefreshHistory}
-      />
+    <div className='h-screen overflow-hidden'>
+      <Navbar />
+
+      <div className="flex h-[calc(100vh-4rem)] overflow-hidden">
+
+        <div className="w-72 h-full border-r bg-white flex flex-col min-h-0">
+          <ChatHistorySidebar
+            setSelectedConversationId={setSelectedConversationId}
+            refreshHistory={refreshHistory}
+          />
+
+          <PdfUpload />
+        </div>
+
+        <div className='flex-1 flex flex-col min-w-0 bg-gray-50 p-6 gap-4'>
+
+          <div className="flex-1 min-h-0">
+            <ChatBox
+              conversationMessage={conversationMessage}
+              selectedConversationId={selectedConversationId}
+              handleRefreshHistory={handleRefreshHistory}
+            />
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
   )
 }
