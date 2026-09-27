@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { apiRequest } from '../services/api';
+import Message from './Message.jsx'
 
 const ChatBox = ({ conversationMessage, selectedConversationId }) => {
 
@@ -7,15 +8,15 @@ const ChatBox = ({ conversationMessage, selectedConversationId }) => {
     const [messages, setMessages] = useState([]);
     const [conversationId, setConversationId] = useState(null);
 
-    useEffect(()=>{
-        if(conversationMessage.length > 0){
+    useEffect(() => {
+        if (conversationMessage.length > 0) {
             const formattedMessage = [];
 
-            for (let i = 0; i < conversationMessage.length; i+=2){
+            for (let i = 0; i < conversationMessage.length; i += 2) {
                 formattedMessage.push(
                     {
-                        question : conversationMessage[i].content,
-                        answer : conversationMessage[i+1]?.content
+                        question: conversationMessage[i].content,
+                        answer: conversationMessage[i + 1]?.content
                     }
                 )
             }
@@ -25,7 +26,7 @@ const ChatBox = ({ conversationMessage, selectedConversationId }) => {
 
     }, [conversationMessage])
 
-    useEffect(()=>{
+    useEffect(() => {
         if (selectedConversationId) {
             setConversationId(selectedConversationId);
         }
@@ -73,10 +74,7 @@ const ChatBox = ({ conversationMessage, selectedConversationId }) => {
 
             {
                 messages.map((message, index) => (
-                    <div key={index}>
-                        <p>{message.question}</p>
-                        <p>{message.answer}</p>
-                    </div>
+                    <Message key={index} message={message} />
                 ))
             }
         </div>
