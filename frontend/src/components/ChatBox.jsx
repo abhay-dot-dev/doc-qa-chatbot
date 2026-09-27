@@ -68,20 +68,29 @@ const ChatBox = ({ conversationMessage, selectedConversationId, handleRefreshHis
     }
 
     return (
-        <div>
-            <input
-                type="text"
-                placeholder='Ask about your document...'
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)} />
+        <div className='h-full flex flex-col'>
 
-            <button onClick={handleSubmit}>Send →</button>
+            <div className='flex-1 min-h-0 overflow-y-auto p-2'>
+                {
+                    messages.map((message, index) => (
+                        <Message key={index} message={message} />
+                    ))
+                }
+            </div>
 
-            {
-                messages.map((message, index) => (
-                    <Message key={index} message={message} />
-                ))
-            }
+            <div className='shrink-0 flex gap-2 border-t pt-4'>
+                <input
+                    className="flex-1 border border-gray-300 rounded-md px-4 py-2 outline-none focus:ring-1 focus:ring-green-500"
+                    type="text"
+                    placeholder='Ask about your document...'
+                    value={question}
+                    onChange={(e) => setQuestion(e.target.value)} />
+
+                <button
+                    className='px-5 py-2 text-white border border-gray-300 bg-green-500 rounded-md outline-none cursor-pointer hover:bg-green-600 transition-colors duration-300'
+                    onClick={handleSubmit}>Send →</button>
+            </div>
+
         </div>
     )
 }
