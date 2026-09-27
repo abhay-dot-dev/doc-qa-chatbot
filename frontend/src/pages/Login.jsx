@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../services/auth';
+import AuthContext from '../context/AuthContext';
 
 const Login = () => {
+
+    const {login} = useContext(AuthContext);
 
     // states for updating email + password
     const [email, setEmail] = useState("");
@@ -15,8 +17,8 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            // passing the email + password to loginUser
-            await loginUser(email, password);
+            // passing the email + password to login using the AuthContext
+            await login(email, password);
 
             // navigate to home page after a succesfull login
             navigate("/")
