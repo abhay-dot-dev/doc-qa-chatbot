@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { apiRequest } from '../services/api';
 
-const PdfUpload = () => {
+const PdfUpload = ({handleRefreshDocuments }) => {
 
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState("");
@@ -22,6 +22,7 @@ const PdfUpload = () => {
 
                 // success message on UI
                 setMessage(response.message);
+                handleRefreshDocuments();
             }
         } catch (error) {
             // catching and setting the error message
