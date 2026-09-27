@@ -4,6 +4,7 @@ import { apiRequest } from '../services/api';
 const ChatHistorySidebar = ({ setSelectedConversationId, refreshHistory }) => {
 
     const [chatHistory, setChatHistory] = useState([]);
+    const [documents, setDocuments] = useState([]);
 
     useEffect(() => {
         async function fetchHistory() {
@@ -11,7 +12,12 @@ const ChatHistorySidebar = ({ setSelectedConversationId, refreshHistory }) => {
                 const response = await apiRequest("/history", {
                     method: "GET"
                 });
-                setChatHistory(response.history); // upading the chatHistory by usung the setter fn
+
+                const documentResponse = await apiRequest("/documents", {
+                    method: "GET"
+                })
+                setChatHistory(response.history); // updating the chatHistory 
+                setDocuments(documentResponse);
             } catch (error) {
                 console.error("error", error)
             }
@@ -42,6 +48,18 @@ const ChatHistorySidebar = ({ setSelectedConversationId, refreshHistory }) => {
                 <h2 className="text-md font-semibold text-gray-500 mb-3">
                     Documents
                 </h2>
+
+                <div className='max-h-32 overflow-y-auto flex flex-col gap-1 hide-scrollbar'>
+                    {
+                        documents.map((d) => (
+                            <p
+                                className='px-3 py-1 rounded-md hover:bg-gray-200'
+                                key={d.id}>
+                                {d.filename}
+                            </p>
+                        ))
+                    }
+                </div>
             </div>
         </div>
     )
