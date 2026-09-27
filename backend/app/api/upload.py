@@ -43,3 +43,11 @@ def upload_pdf(file: UploadFile = File(...), current_user = Depends(get_current_
     db.commit()
 
     return {"message": f"{file.filename} uploaded successfully"}
+
+@router.get("/documents")
+def get_document(current_user= Depends(get_current_user), db:Session = Depends(get_db)):
+    documents = db.query(Document).filter(
+        Document.user_id == current_user.id
+    ).all()
+
+    return documents
