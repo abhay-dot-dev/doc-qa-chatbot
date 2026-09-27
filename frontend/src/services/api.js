@@ -20,8 +20,10 @@ export async function apiRequest(endpoint, options){
 
     // if not a succesfull response, we will throw an error
     if(!response.ok) {
-        const error = await response.json()
-        throw new Error(error.detail);
+        const error = await response.json();
+        // added a status key so that we can later use it for redirection in login page
+        error.status = response.status;
+        throw error;
     }
 
     const data = await response.json();
