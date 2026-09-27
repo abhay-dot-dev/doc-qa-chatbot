@@ -22,3 +22,7 @@ export async function signupUser(email, password) {
 
     return data;
 }
+
+export function logoutUser() {
+    localStorage.removeItem("access_token");
+}
