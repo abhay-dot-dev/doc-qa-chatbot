@@ -1,17 +1,17 @@
-import React, {useContext} from 'react'
-import {useNavigate} from 'react-router-dom'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 
-const Navbar = () => {
+const Navbar = ({ handleNewChat }) => {
 
-    const {user, logout} = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
     const navigate = useNavigate();
 
     function handleLogout() {
         logout();                // removes the access token 
         navigate("/login")       // navigates to login 
     }
-    
+
     return (
         <nav className="h-16 px-6 flex items-center justify-between border-b bg-white">
             <div className="text-xl font-semibold">
@@ -20,7 +20,9 @@ const Navbar = () => {
 
             <div className="flex items-center gap-4">
 
-                <button className="px-4 py-2 rounded-md bg-green-500 text-white cursor-pointer hover:bg-green-600 transition-all duration-300">
+                <button className="px-4 py-2 rounded-md bg-green-500 text-white cursor-pointer hover:bg-green-600 transition-all duration-300"
+                    onClick={handleNewChat}
+                >
                     + New Chat
                 </button>
 
