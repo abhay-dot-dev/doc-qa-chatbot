@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { apiRequest } from '../services/api';
 import Message from './Message.jsx'
 
-const ChatBox = ({ conversationMessage, selectedConversationId }) => {
+const ChatBox = ({ conversationMessage, selectedConversationId, handleRefreshHistory }) => {
 
     const [question, setQuestion] = useState("");
     const [messages, setMessages] = useState([]);
@@ -44,6 +44,11 @@ const ChatBox = ({ conversationMessage, selectedConversationId }) => {
                         }
                     )
                 });
+
+                if (conversationId == null) {
+                    // if true, that means it's new conversation, and we update the state.
+                    handleRefreshHistory();
+                }
 
                 setConversationId(response.conversation_id);
 
