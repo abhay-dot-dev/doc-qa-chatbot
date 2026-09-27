@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { apiRequest } from '../services/api';
 
-const ChatHistorySidebar = ({ setSelectedConversationId, refreshHistory }) => {
+const ChatHistorySidebar = ({ setSelectedConversationId, refreshHistory, refreshDocuments }) => {
 
     const [chatHistory, setChatHistory] = useState([]);
     const [documents, setDocuments] = useState([]);
@@ -23,7 +23,7 @@ const ChatHistorySidebar = ({ setSelectedConversationId, refreshHistory }) => {
             }
         }
         fetchHistory();
-    }, [refreshHistory])
+    }, [refreshHistory, refreshDocuments])
 
     return (
         <div className='flex-1 min-h-0 p-4 flex flex-col'>
