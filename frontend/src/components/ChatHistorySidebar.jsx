@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { apiRequest } from '../services/api';
 
-const ChatHistorySidebar = ({ setSelectedConversationId }) => {
+const ChatHistorySidebar = ({ setSelectedConversationId, refreshHistory }) => {
 
     const [chatHistory, setChatHistory] = useState([]);
 
@@ -17,7 +17,8 @@ const ChatHistorySidebar = ({ setSelectedConversationId }) => {
             }
         }
         fetchHistory();
-    }, [])
+    }, [refreshHistory])
+
     return (
         <div>
             {
