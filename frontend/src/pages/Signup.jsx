@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
     // states for updating email + password
+    const [message, setMessage] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -13,11 +14,22 @@ const Signup = () => {
         // preventing the browser's default behaviour
         e.preventDefault();
 
-        // passing the email + password to signupUser
-        await signupUser(email, password);
+        try {
+            // passing the email + password to signupUser
+            await signupUser(email, password);
 
-        // navigating to login page after successful signup
-        navigate("/login");
+            // navigating to login page after successful signup
+            navigate("/login");
+        } catch (error) {
+            if (error.status === 400) {
+                setMessage(error.detail);
+
+                setTimeout(() => {
+                    navigate("/login")
+                }, 2000);
+            }
+        }
+
     }
 
     return (
@@ -51,6 +63,12 @@ const Signup = () => {
                         className='w-full bg-green-500 text-white py-2 rounded-md cursor-pointer hover:bg-green-600 transition-all duration-300 ease-in'
                         type='submit'>Signup</button>
                 </form>
+
+                {message && (
+                    <div className="mt-2 text-red-600 text-sm text-center">
+                        {message}
+                    </div>
+                )}
 
                 <p className='text-center text-sm text-gray-600 mt-1.5'>
                     Already have an account?{" "}
