@@ -10,6 +10,7 @@ const Home = () => {
   const [selectedConversationId, setSelectedConversationId] = useState(null);
   const [conversationMessage, setConversationMessage] = useState([]);
   const [refreshHistory, setRefreshHistory] = useState(0);
+  const [refreshDocuments, setRefreshDocuments] = useState(0);
 
   async function fetchConversationMessage(conversationId) {
     const response = await apiRequest(`/history/${conversationId}`, {
@@ -29,6 +30,10 @@ const Home = () => {
     setRefreshHistory(previous => previous + 1);
   }
 
+  function handleRefreshDocuments() {
+    setRefreshDocuments(previous => previous + 1);
+  }
+
   return (
     <div className='h-screen overflow-hidden'>
       <Navbar />
@@ -39,9 +44,10 @@ const Home = () => {
           <ChatHistorySidebar
             setSelectedConversationId={setSelectedConversationId}
             refreshHistory={refreshHistory}
+            refreshDocuments={refreshDocuments}
           />
 
-          <PdfUpload />
+          <PdfUpload handleRefreshDocuments={handleRefreshDocuments} />
         </div>
 
         <div className='flex-1 flex flex-col min-w-0 bg-gray-50 p-6 gap-4'>
