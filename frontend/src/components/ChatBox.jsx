@@ -22,14 +22,15 @@ const ChatBox = ({ conversationMessage, selectedConversationId, handleRefreshHis
             }
 
             setMessages(formattedMessage);
+        } else {
+            setMessages([]);
         }
 
     }, [conversationMessage])
 
     useEffect(() => {
-        if (selectedConversationId) {
-            setConversationId(selectedConversationId);
-        }
+        setConversationId(selectedConversationId);
+
     }, [selectedConversationId])
 
     async function handleSubmit() {
