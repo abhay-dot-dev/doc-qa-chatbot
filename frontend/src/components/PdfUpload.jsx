@@ -14,7 +14,7 @@ const PdfUpload = () => {
                 const formData = new FormData();
                 formData.append("file", file);
 
-                 // calling API
+                // calling API
                 const response = await apiRequest("/upload", {
                     method: "POST",
                     body: formData
@@ -30,13 +30,16 @@ const PdfUpload = () => {
     }
 
     return (
-        <div>
+        <div className='shrink-0 p-4 flex flex-col items-center gap-2'>
             <input
+                className='w-full px-3 py-1.5 text-center cursor-pointer'
                 type="file"
                 accept='.pdf'
                 onChange={(e) => setFile(e.target.files[0])} />
 
-            <button onClick={handleUpload}>Upload</button>
+            <button
+                className="px-3 py-1.5 rounded-md bg-green-500 text-white cursor-pointer hover:bg-green-600 transition-colors duration-300"
+                onClick={handleUpload}>Upload</button>
 
             <p>{message}</p>
         </div>
