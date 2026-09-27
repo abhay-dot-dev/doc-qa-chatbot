@@ -12,13 +12,18 @@ const Login = () => {
 
     async function handleSubmit(e) {
         // preventing the browser's default behaviour
-        e.preventDefault();  
+        e.preventDefault();
 
-        // passing the email + password to loginUser
-        await loginUser(email, password);
+        try {
+            // passing the email + password to loginUser
+            await loginUser(email, password);
 
-        // navigate to home page after a succesfull login
-        navigate("/") 
+            // navigate to home page after a succesfull login
+            navigate("/")
+        } catch (error) {
+            if (error.status === 401)
+                navigate("/signup")    // redirecting to signup page if not sucessfull login
+        }
     }
 
     return (
