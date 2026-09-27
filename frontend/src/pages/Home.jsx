@@ -34,9 +34,14 @@ const Home = () => {
     setRefreshDocuments(previous => previous + 1);
   }
 
+  function handleNewChat() {
+    setSelectedConversationId(null);
+    setConversationMessage([]);
+  }
+
   return (
     <div className='h-screen overflow-hidden'>
-      <Navbar />
+      <Navbar handleNewChat={handleNewChat} />
 
       <div className="flex h-[calc(100vh-4rem)] overflow-hidden">
 
