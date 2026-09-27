@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { apiRequest } from '../services/api'
-import { logoutUser } from '../services/auth'
+import AuthContext from '../context/AuthContext'
 import ChatBox from '../components/ChatBox'
 import PdfUpload from '../components/PdfUpload'
 import ChatHistorySidebar from '../components/ChatHistorySidebar'
@@ -12,6 +12,7 @@ const Home = () => {
   const [conversationMessage, setConversationMessage] = useState([]);
   const [refreshHistory, setRefreshHistory] = useState(0);
   const navigate = useNavigate();
+  const {logout} = useContext(AuthContext);
 
   async function fetchConversationMessage(conversationId) {
     const response = await apiRequest(`/history/${conversationId}`, {
@@ -32,7 +33,7 @@ const Home = () => {
   }
 
   function handleLogoutUser() {
-    logoutUser();        // removes the access token 
+    logout();        // removes the access token 
     navigate("/login");  // navigates to login 
   }
 
